@@ -6,12 +6,41 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>vue_integration</title>
+    <!-- Payment Wall hoja de estilos -->
+    <link href="https://sandbox.sipay.es/pwall_app/css/app.css" rel=stylesheet>
+    <!-- Payment Wall JavaScript para gestión de eventos -->
+    <script src="https://sandbox.sipay.es/pwall_sdk/pwall_sdk.bundle.js"></script>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but vue_integration doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app2"></div>
+    <script data-url="/backend" data-amount="3000" data-currency="EUR" data-placeholder="#app" src="https://sandbox.sipay.es/pwall_app/js/app.js"></script>
     <!-- built files will be auto injected -->
+
+    <!-- Payment Wall evento personalizado para gestionar los métodos de pago basados en REDIRECT.
+    Es importante utilizar un sistema de plantillas tipo Jinja2 para asignar el valor correcto a
+    error, method y request_id en función de los parámetros GET que reciba en la URL indicada
+    en notify.result.
+    En el caso de nuestro ejemplo, estamos utilizando nomenclatura propia de Jinja2 para indicar que en caso
+    de que no tengamos valor de error podamos asignar 'null', y en el caso de resto de parámetros pondrán
+    estar vacíos.
+    -->
+    <script>
+      document.getElementById('app2').addEventListener(
+        'payment_wall_drawn',
+        function(ev) {
+          document.getElementById('app2').dispatchEvent(
+            new CustomEvent('payment_wall_process_redirect', {
+              detail: {
+                "error": "{{ error or 'null' }}",
+                "method": "{{ method }}",
+                "request_id": "{{ request_id }}"
+              }
+            })
+          );
+        });
+  </script>
   </body>
 </html>
