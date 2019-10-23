@@ -16,7 +16,7 @@
       <strong>We're sorry but vue_integration doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app2"></div>
-    <script data-url="http://localhost:3000/actions/1" data-amount="3000" data-currency="EUR" data-placeholder="#app" src="https://sandbox.sipay.es/pwall_app/js/app.js"></script>
+    <script data-url="http://localhost:3000/actions/1" data-amount="1" data-currency="EUR" data-placeholder="#app" src="https://sandbox.sipay.es/pwall_app/js/app.js"></script>
     <!-- built files will be auto injected -->
 
     <!-- Payment Wall evento personalizado para gestionar los métodos de pago basados en REDIRECT.
@@ -27,11 +27,11 @@
     de que no tengamos valor de error podamos asignar 'null', y en el caso de resto de parámetros pondrán
     estar vacíos.
     -->
-    <script>
-      document.getElementById('app2').addEventListener(
+    <!-- <script>
+      document.getElementById('app').addEventListener(
         'payment_wall_drawn',
         function(ev) {
-          document.getElementById('app2').dispatchEvent(
+          document.getElementById('app').dispatchEvent(
             new CustomEvent('payment_wall_process_redirect', {
               detail: {
                 "error": "{{ error or 'null' }}",
@@ -41,6 +41,6 @@
             })
           );
         });
-  </script>
+  </script> -->
   </body>
 </html>

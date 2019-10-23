@@ -12,7 +12,7 @@ npm run serve
 
 ### Compiles and hot-reloads for development
 ```
-node src/app.js
+node src/server.js
 ```
 
 <!-- ### Compiles and minifies for production

@@ -1,6 +1,6 @@
 <template>
   <div class="shop">
-    <Integration
+    <!-- <Integration
       v-if="!checkout"
       :amount="amount"
       :currency="currency"
@@ -8,43 +8,54 @@
       @amount="e => amount = e"
       @currency="e => currency = e"
     />
-    <Pwall v-else/>
+    <Pwall v-else/> -->
+    <div class=container>
+        <form>
+            <h1>Bienvenido a la tienda de prueba del Payment Wall </h1>
+            <br>
+            <div>
+                <label for="currency">
+                    Seleccione la moneda en la que desea operar. Esta elección está habilitada para el usuario en el entorno de pruebas
+                </label>
+                <br><br>
+                <select id="currency" v-model="model.currency">
+                    <option disabled value=''>Please select one</option>
+                    <option value='EUR'>EUR</option>
+                </select>
+                <br>
+                <span>Moneda seleccionada: {{ model.currency }}</span>
+            </div>
+            <br>
+            <h3> Listado de productos </h3>
+            <div>
+                <div>
+                    <div>
+                        <img class=item onclick="return check(this, 1)" height="90" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Llavero_bal%C3%B3n_de_plata.jpg/256px-Llavero_bal%C3%B3n_de_plata.jpg">
+                        <p>Llavero balón de plata</p>
+                        <h4>Precio: 0,01&euro;</h4>
+                    </div>
+                </div>
+                <small id="amountHelp" class="form-text text-muted">Introduzca la cantidad de llaveros que desea comprar</small>
+                <br>
+                <label for="amount">Cantidad</label>
+                <input name=amount type="number" v-model="model.amount" id="amount" aria-describedby="amountHelp" placeholder="1" >
+            </div>
+            <router-link to="/checkout" :model="model" tag="button">Comprar</router-link>
+        </form>
+    </div>
   </div>
 </template>
 
 <script>
-import Pwall from '@/components/Pwall.vue'
-import Integration from '@/components/Integration.vue'
 export default {
   name: 'Shop',
-  components: {
-    Pwall,
-    Integration
-  },
   data:() => ({
+    model: {
       currency: '',
       amount: 1,
       checkout: false
-  }),
-  mounted() {
-      document.addEventListener('payment_wall_load', function(){
-          document.getElementById('app').addEventListener("payment_wall_loaded", function(){
-            // This is NOT required by normal integrations.
-            // This enables real-time (ajax-like) on-screen rendering of the
-            // operation results.
-            document.getElementById('app').addEventListener(
-              'payment_wall_payment_ok',
-              function(ev) {
-                  document.getElementById('result').style.display = "block";
-                  document.getElementById('masked_card').innerHTML = ev.detail.payload.masked_card;
-                  document.getElementById('order').innerHTML = ev.detail.payload.order;
-                  document.getElementById('authorizator').innerHTML = ev.detail.payload.authorizator;
-                  document.getElementById('transaction_id').innerHTML = ev.detail.payload.transaction_id;
-                  document.getElementById('currency').innerHTML = ev.detail.payload.currency;
-              });
-            });
-      });
-  }
+    }
+  })
 }
 </script>
 

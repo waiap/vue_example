@@ -4,7 +4,7 @@ var cors = require('cors');
 var app = express();
 
 // Setup pwall class
-const _notify_url = 'http://92ef471a.ngrok.io/' //Nombre del ngrok
+const _notify_url = 'http://92ef471a.ngrok.io/checkout' //Nombre del ngrok
 pwall = new pwall(
   endpoint = 'https://sandbox.sipay.es/pwall/api/v1/actions',
   key = 'sipay-test-team',

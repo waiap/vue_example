@@ -18,10 +18,10 @@ class Pwall {
     }
 
     action(
-        payload, 
-        amount, 
-        currency, 
-        notify_url, 
+        payload,
+        amount,
+        currency,
+        notify_url,
         group_id='0',
         onResponse = () => {},
         onPaymentSuccess = () => {},
@@ -42,7 +42,7 @@ class Pwall {
             body: request_params.body,
             method: "POST"
         }, function(error, httpResponse, res) {
-            
+
             if (request_params.body['payload']['action'] == 'sale' && res['result']['code'] == '0') {
                 var method = (request_params.body['payload']['method'] || request_params.body['payload']['params']['method'])
                 switch (method) {
@@ -71,7 +71,7 @@ class Pwall {
             'mode': this.mode,
             'payload': this.parsePayload(payload, amount, currency, notify_url, group_id)
         }
-        
+
         return {
             'body': body,
             'headers': this.getHeaders(body)
