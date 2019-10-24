@@ -10,9 +10,14 @@ npm install
 npm run serve
 ```
 
-### Compiles and hot-reloads for development
+### hot-reload node backend
 ```
 node src/server.js
+```
+
+### follow instrucctions to run ngrok
+```
+https://dashboard.ngrok.com/get-started
 ```
 
 <!-- ### Compiles and minifies for production
