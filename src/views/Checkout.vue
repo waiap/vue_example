@@ -1,5 +1,8 @@
 <template>
-    <Pwall/>
+    <div id="pwall-container" style="display: none">
+        Payment container
+        <Pwall/>
+    </div>
 </template>
 
 <script>
@@ -15,24 +18,39 @@ export default {
             default: null
         }
     },
+    data: () => ({
+        request_id: null,
+        method: null,
+        loaded: false
+    }),
     mounted() {
-        document.addEventListener('payment_wall_load', function(){
-        document.getElementById('app').addEventListener("payment_wall_loaded", function(){
-            // This is NOT required by normal integrations.
-            // This enables real-time (ajax-like) on-screen rendering of the
-            // operation results.
-            document.getElementById('app').addEventListener(
-                'payment_wall_payment_ok',
-                function(ev) {
-                    document.getElementById('result').style.display = "block";
-                    document.getElementById('masked_card').innerHTML = ev.detail.payload.masked_card;
-                    document.getElementById('order').innerHTML = ev.detail.payload.order;
-                    document.getElementById('authorizator').innerHTML = ev.detail.payload.authorizator;
-                    document.getElementById('transaction_id').innerHTML = ev.detail.payload.transaction_id;
-                    document.getElementById('currency').innerHTML = ev.detail.payload.currency;
+        /* eslint-disable */
+        /**
+         * if method and request_id are received them verify transaction with the event payment_wall_process_redirect
+         * and listen for the events  payment_wall_payment_ok or payment_wall_payment_ko
+         * */
+        if(this.$route.query.request_id && this.$route.query.method) {
+            document.getElementById('app').addEventListener("payment_wall_drawn", function(data) {
+                document.getElementById('app').addEventListener('payment_wall_payment_ok', ev => {
+                    alert('Payment Approved');
+                    console.log('payment_wall_payment_ok', ev);
+                });
+                document.getElementById('app').addEventListener('payment_wall_payment_ko', ev => {
+                    alert('Payment Denied');
+                    console.log('payment_wall_payment_ko', ev.detail);
+                });
+                document.dispatchEvent(new Event('payment_wall_process_redirect'));
+            });
+        } else {
+            document.addEventListener('payment_wall_load', function(){
+                console.log('payment_wall_load');
+                document.getElementById('app').addEventListener("payment_wall_loaded", ev => {
+                    console.log('payment_wall_loaded',ev.detail);
                 });
             });
-        });
+        }
+        var container = document.getElementById('pwall-container');
+        container.style.display = '';
     }
 }
 </script>
