@@ -15,10 +15,18 @@ npm run serve
 node src/server.js
 ```
 
-### follow instrucctions to run ngrok
+### follow instrucctions to run ngrok - required for local environment
+
+Needs to run the application with a valid url.
+
+For testing ngrok can be used. 
+
 ```
 https://dashboard.ngrok.com/get-started
 ```
+
+Update the generated ngrok url in  ./src/server.js  const _notify_url='<generated-ngrok-url>'
+  
 
 <!-- ### Compiles and minifies for production
 ```
