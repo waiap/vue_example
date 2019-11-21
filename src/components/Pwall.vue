@@ -28,7 +28,8 @@ export default {
               new CustomEvent('payment_wall_process_redirect', {
                 detail: {
                   request_id: vm.$route.query.request_id || vm.$route.query.reference_id,
-                  method: vm.$route.query.method
+                  method: vm.$route.query.method,
+                  error: vm.$route.query.error || null
                   }
                 })
             );
