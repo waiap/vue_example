@@ -43,7 +43,7 @@ class Pwall {
             method: "POST"
         }, function(error, httpResponse, res) {
 
-            if (request_params.body['payload']['action'] == 'sale' && res['result']['code'] == '0') {
+            if (request_params.body['payload']['action'] == 'pwall.sale' && res['result']['code'] == '0') {
                 var method = (request_params.body['payload']['method'] || request_params.body['payload']['params']['method'])
                 switch (method) {
                     case 'fpay':
