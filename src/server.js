@@ -1,16 +1,16 @@
 var express = require("express");
 var pwall = require("./pwall");
 var cors = require("cors");
+var config = require("../config");
 var app = express();
 
 // Setup pwall class
-const _notify_url = "http://92ef471a.ngrok.io/checkout"; //Nombre del ngrok
 pwall = new pwall(
-  (endpoint = "https://sandbox.sipay.es/pwall/api/v1/actions"),
-  (key = "sipay-test-team"),
-  (secret = "api-secret"),
-  (resource = "sipay-test-pwall"),
-  (mode = "sha256")
+  (endpoint = config.endpoint),
+  (key = config.key),
+  (secret = config.secret),
+  (resource = config.resource),
+  (mode = config.mode)
 );
 
 // Setup server
@@ -23,7 +23,7 @@ app.post("/actions/:amount", function(req, res) {
     (payload = req.body),
     (amount = parseInt(req.params.amount)),
     (currency = "EUR"),
-    (notify_url = _notify_url),
+    (notify_url = config.notify_url),
     (group_id = "0"),
     (onResponse = data => {
       res.json(data);

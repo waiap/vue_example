@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve_api": "node src/server.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -33,10 +34,7 @@
     "env": {
       "node": true
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
+    "extends": ["plugin:vue/essential", "eslint:recommended"],
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
@@ -47,8 +45,5 @@
       "autoprefixer": {}
     }
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+  "browserslist": ["> 1%", "last 2 versions"]
 }
