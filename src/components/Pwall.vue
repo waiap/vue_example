@@ -43,7 +43,8 @@ export default {
               detail: {
                 request_id:
                   vm.$route.query.request_id || vm.$route.query.reference_id,
-                method: vm.$route.query.method
+                method: vm.$route.query.method,
+                error: vm.$route.query.error || null
               }
             })
           );
