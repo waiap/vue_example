@@ -24,14 +24,15 @@
     <div id="app2"></div>
     <!--
       data-timeout: can be set to any expected value based on the customer backend
+      data-url: Should be updated dinamically EX: http://localhost:3000/actions/30000
+      data-amount: Should be updated dinamically EX: 30000
+      data-currency: Should be updated dinamically EX: EUR
      -->
     <script
-      data-url="http://localhost:3000/actions/30000"
-      data-amount="1"
-      data-currency="EUR"
-      data-timeout="30000"
-      data-placeholder="#app"
-      src="https://sandbox.sipay.es/pwall_app/js/app.js"
+    id="pwall_script"
+    src="https://sandbox.sipay.es/pwall_app/js/app.js"
+    data-timeout="30000"
+    data-placeholder="#app"
     ></script>
     <!-- built files will be auto injected -->
 
