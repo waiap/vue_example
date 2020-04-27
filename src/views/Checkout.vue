@@ -46,7 +46,6 @@ export default {
           request_id: this.$route.query.request_id,
           method: this.$route.query.method
         });
-        document.dispatchEvent(new Event("payment_wall_process_redirect"));
       });
     } else {
       window.PaymentWall.listenTo(placeholder, "load", function() {
@@ -56,7 +55,6 @@ export default {
         });
       });
     }
-    var container = document.getElementById("pwall-container");
     container.style.display = "";
   }
 };
