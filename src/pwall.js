@@ -40,6 +40,8 @@ class Pwall {
       function(error, httpResponse, res) {
         if (
           request_params.body["payload"]["action"] == "pwall.sale" &&
+          request_params.body["payload"]["action"] == "pwall.sale" &&
+          request_params.body['payload']['code'] != '198' &&
           res["result"]["code"] == "0"
         ) {
           var method =
